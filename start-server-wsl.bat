@@ -6,7 +6,7 @@ setlocal enabledelayedexpansion
 set wsl_docker_compose_file=/mnt/g/DOCKER_SERVER/DOCKER/DOCKER_SERVER/wsl2/docker-compose.yml
 
 :: get sub linux ip
-wsl ip addr | grep eth0 | awk "/inet ([0-9\.]+)/{print $2}"|awk -F "/" "{print $1}" >> ip_tmp
+wsl ip addr | grep eth0 | awk '/inet ([0-9\.]+)/{sub("inet ","");sub("/[0-9]+","");print $1}'   >> ip_tmp
 set/p sub_linux_ip=<ip_tmp
 del ip_tmp
 echo SUB LINUX IP:%sub_linux_ip%
